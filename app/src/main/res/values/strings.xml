@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Room</string>
+    <string name="add_book">Add book</string>
+    <string name="add_book_bottom_sheet_title">Add book</string>
+    <string name="book_title">title</string>
+    <string name="book_description">description</string>
+    <string name="add_author_menu_item">Add author</string>
+    <string name="add_author">Add author</string>
+    <string name="author_activity_author_name">Author</string>
 </resources>
