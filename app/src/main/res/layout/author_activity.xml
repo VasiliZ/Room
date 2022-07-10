@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/authorName"
+        android:id="@+id/authorNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/middle_margin"

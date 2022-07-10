@@ -30,7 +30,7 @@ class AuthorListAdapter(private val editAuthorCallback: (Int) -> Unit) :
 
     class AuthorItemStateHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val authorName = view.findViewById<TextView>(R.id.authorName)
+        private val authorName = view.findViewById<TextView>(R.id.authorNameTextView)
 
         fun bind(author: AuthorPresentation) {
             authorName.text = author.name

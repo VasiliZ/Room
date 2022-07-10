@@ -21,7 +21,7 @@ class AuthorListViewModel : ViewModel() {
 
     private fun getAuthors() {
         viewModelScope.launch(Dispatchers.IO) {
-            authorRepository.getAuthor().collect { authorList ->
+            authorRepository.getAuthors().collect { authorList ->
                 authorsLiveData.postValue(authorList.map {
                     AuthorPresentation(
                         id = it.id,

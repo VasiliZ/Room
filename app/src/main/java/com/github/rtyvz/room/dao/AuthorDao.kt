@@ -16,4 +16,7 @@ interface AuthorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAuthor(bookEntity: AuthorEntity)
 
+    @Query("SELECT * FROM AuthorEntity where id =:authorId")
+    fun getAuthorById(authorId: Int): AuthorEntity
+
 }

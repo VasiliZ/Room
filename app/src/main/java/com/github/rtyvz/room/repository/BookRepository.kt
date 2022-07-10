@@ -15,9 +15,11 @@ class BookRepository(private val bookDao: BookDao) {
         bookDao.deleteBookById(bookId)
     }
 
-    suspend fun updateBooks(bookList: List<BookEntity>) {
-        bookList.forEach {
-            bookDao.insertBook(it)
-        }
+    suspend fun updateBooks(book: BookEntity) {
+        bookDao.insertBook(book)
     }
+
+    fun getFilteredBooks(authorId: Int) = bookDao.getFilteredBookList(authorId)
+
+    fun getBookWithAuthor(bookId: Int) = bookDao.getBookWithAuthor(bookId)
 }

@@ -4,20 +4,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.rtyvz.room.R
 import com.github.rtyvz.room.data.BookPresentation
 
-class AuthorsBooksAdapter :
+class AuthorsBooksAdapter(private val onBookCheckCallback: (Boolean, BookPresentation) -> Unit) :
     ListAdapter<BookPresentation, AuthorsBooksAdapter.AuthorsBookItemHolder>(ItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthorsBookItemHolder {
         return AuthorsBookItemHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.select_book_item, parent, false)
-        )
+        ).apply {
+            this.itemView.findViewById<CheckBox>(R.id.selectBookCheckBox)
+                .setOnCheckedChangeListener { _, b ->
+                    onBookCheckCallback(b, currentList[adapterPosition])
+                }
+        }
     }
 
     override fun onBindViewHolder(holder: AuthorsBookItemHolder, position: Int) {
@@ -27,11 +31,10 @@ class AuthorsBooksAdapter :
     class AuthorsBookItemHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val checkBox = view.findViewById<CheckBox>(R.id.selectBookCheckBox)
-        private val bookTitle = view.findViewById<TextView>(R.id.selectBookTitle)
 
         fun bind(book: BookPresentation) {
-            checkBox.isSelected = book.authorId != 0
-            bookTitle.text = book.title
+            checkBox.isChecked = book.authorId != 0
+            checkBox.text = book.title
         }
     }
 }

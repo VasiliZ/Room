@@ -5,9 +5,11 @@ import com.github.rtyvz.room.db.entity.AuthorEntity
 
 class AuthorRepository(private val authorDao: AuthorDao) {
 
-    fun getAuthor() = authorDao.getAuthors()
+    fun getAuthors() = authorDao.getAuthors()
 
     suspend fun addAuthor(author: AuthorEntity) {
         authorDao.insertAuthor(author)
     }
+
+    fun getAuthorById(authorId: Int) = authorDao.getAuthorById(authorId)
 }

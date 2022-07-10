@@ -20,7 +20,7 @@ class AuthorActivity : AppCompatActivity() {
         setContentView(R.layout.author_activity)
 
         viewModel = ViewModelProvider(this)[AuthorViewModel::class.java]
-        authorName = findViewById(R.id.authorName)
+        authorName = findViewById(R.id.authorNameTextView)
         addAuthorButton = findViewById(R.id.addAuthorButton)
 
         addAuthorButton.setOnClickListener {

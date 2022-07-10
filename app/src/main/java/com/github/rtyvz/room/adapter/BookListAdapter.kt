@@ -12,7 +12,8 @@ import com.github.rtyvz.room.R
 import com.github.rtyvz.room.data.BookPresentation
 
 class BookListAdapter(
-    private val deleteBookCallback: (Int) -> Unit
+    private val deleteBookCallback: (Int) -> Unit,
+    private val onClickItemCallback: (Int) -> Unit
 ) :
     ListAdapter<BookPresentation, BookListAdapter.BookItemViewHolder>(BookDiffCallback()) {
 
@@ -20,9 +21,13 @@ class BookListAdapter(
         return BookItemViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.book_item, parent, false)
         ).apply {
-            this.itemView.findViewById<ImageView>(R.id.deleteBookAction).setOnClickListener {
-                deleteBookCallback(currentList[adapterPosition].id)
+            this.itemView.setOnClickListener {
+                onClickItemCallback(currentList[adapterPosition].id)
             }
+            this.itemView.findViewById<ImageView>(R.id.deleteBookAction)
+                .setOnClickListener {
+                    deleteBookCallback(currentList[adapterPosition].id)
+                }
         }
     }
 

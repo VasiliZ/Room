@@ -14,6 +14,8 @@ import com.github.rtyvz.room.R
 import com.github.rtyvz.room.adapter.BookListAdapter
 import com.github.rtyvz.room.viewmodel.BookListViewModel
 
+private const val EMPTY_STRING = ""
+
 class BookListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: BookListViewModel
@@ -35,8 +37,12 @@ class BookListActivity : AppCompatActivity() {
         addBookButton = bottomSheet.findViewById(R.id.addBookButton)
         bookList = findViewById(R.id.bookList)
 
-        bookListAdapter = BookListAdapter {
+        bookListAdapter = BookListAdapter({
             viewModel.deleteBook(it)
+        }) {
+            startActivity(Intent(this, AdditionalBookInformationActivity::class.java).apply {
+                putExtra(AdditionalBookInformationActivity.ADDITIONAL_INFORMATION_BOOK_ID_EXTRA, it)
+            })
         }
         bookList.adapter = bookListAdapter
         viewModel = ViewModelProvider(this)[BookListViewModel::class.java]
@@ -64,7 +70,7 @@ class BookListActivity : AppCompatActivity() {
     }
 
     private fun clearInputFields() {
-        title.text = ""
-        description.text = ""
+        title.text = EMPTY_STRING
+        description.text = EMPTY_STRING
     }
 }
